@@ -29,7 +29,7 @@ private:
 
 	ros::Time startTime;
 	ros::NodeHandle nh;
-	
+
 	ros::Subscriber imu_sub;
 	ros::Subscriber gps_fix_sub;
 	ros::Subscriber gps_vel_sub;

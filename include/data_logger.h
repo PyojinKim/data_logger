@@ -41,10 +41,10 @@ public:
     void addEntry(const LogIDs &id, const double &data, const double &timestamp);
 
     void start()
-	{ 
-		 ROS_INFO("start data logger"); 
-		 std::thread th(&DataLogger::run, this); 
-		 th.detach(); 
+	{
+		 ROS_INFO("start data logger");
+		 std::thread th(&DataLogger::run, this);
+		 th.detach();
 		 ROS_INFO("logging thread detached");
 	}
     void run();
@@ -57,7 +57,7 @@ public:
 	}
     void clearLog()
 	{
-		shutdown(); 
+		shutdown();
 		start();
 	}
 

@@ -50,10 +50,10 @@ void DataLogger::run()
 
 	string line;
 	shared_ptr<LogEntry> entry;
-	
+
 	while(mRunning)
 	{
-		mMutex_logQueue.lock(); 
+		mMutex_logQueue.lock();
 		int size = mLogQueue.size();
 		mMutex_logQueue.unlock();
 
@@ -72,7 +72,7 @@ void DataLogger::run()
 
 			if(mLogStream != NULL)
 				*mLogStream << line;
-			
+
 			mMutex_logQueue.lock();
 			size = mLogQueue.size();
 			mMutex_logQueue.unlock();
@@ -82,10 +82,10 @@ void DataLogger::run()
 	}
 
 	// Clear the remainder of the queue
-	mMutex_logQueue.lock(); 
-	int size = mLogQueue.size(); 
+	mMutex_logQueue.lock();
+	int size = mLogQueue.size();
 	mMutex_logQueue.unlock();
-	
+
 	while(size > 0)
 	{
 		mMutex_logQueue.lock();
@@ -98,7 +98,7 @@ void DataLogger::run()
 		line = line + to_string(entry->id) + "\t";
 		line = line + entry->str;
 		line = line + "\n";
-		
+
 		if(mLogStream != NULL)
             *mLogStream << line;
 
@@ -182,17 +182,17 @@ void DataLogger::generateMatlabHeader()
 		str = "%%%%%%VICON_POSE : position(3) / orientation(4) \n";
 		*logStream << str;
 
-		str = "LOG_GLOBAL_TIME = "+ to_string(LOG_GLOBAL_TIME) +";\n";        
+		str = "LOG_GLOBAL_TIME = "+ to_string(LOG_GLOBAL_TIME) +";\n";
 		*logStream << str;
-		str = "LOG_MAVROS_IMU = "+ to_string(LOG_MAVROS_IMU) +";\n";        
+		str = "LOG_MAVROS_IMU = "+ to_string(LOG_MAVROS_IMU) +";\n";
 		*logStream << str;
-		str = "LOG_MAVROS_GPS_FIX = "+ to_string(LOG_MAVROS_GPS_FIX) +";\n";        
+		str = "LOG_MAVROS_GPS_FIX = "+ to_string(LOG_MAVROS_GPS_FIX) +";\n";
 		*logStream << str;
-		str = "LOG_MAVROS_GPS_VEL = "+ to_string(LOG_MAVROS_GPS_VEL) +";\n";        
+		str = "LOG_MAVROS_GPS_VEL = "+ to_string(LOG_MAVROS_GPS_VEL) +";\n";
 		*logStream << str;
-		str = "LOG_SVO_POSE = "+ to_string(LOG_SVO_POSE) +";\n";        
+		str = "LOG_SVO_POSE = "+ to_string(LOG_SVO_POSE) +";\n";
 		*logStream << str;
-		str = "LOG_VICON_POSE = "+ to_string(LOG_VICON_POSE) +";\n";        
+		str = "LOG_VICON_POSE = "+ to_string(LOG_VICON_POSE) +";\n";
 		*logStream << str;
 
 		logStream->close();

@@ -9,15 +9,15 @@ MessageHandler::MessageHandler()
 {
 	log = new DataLogger;
 	log->start();
-	
+
 	startTime = ros::Time::now();
 	log->addEntry( LOG_GLOBAL_TIME, (startTime.toSec()), 0.0 );
 
-	imu_sub = nh.subscribe("mavros/imu/data", 10, 
+	imu_sub = nh.subscribe("mavros/imu/data", 10,
 			&MessageHandler::imu_callback, this);
-	gps_fix_sub = nh.subscribe("mavros/global_position/raw/fix", 10, 
+	gps_fix_sub = nh.subscribe("mavros/global_position/raw/fix", 10,
 			&MessageHandler::gps_fix_callback, this);
-	gps_vel_sub = nh.subscribe("mavros/global_position/raw/gps_vel", 10, 
+	gps_vel_sub = nh.subscribe("mavros/global_position/raw/gps_vel", 10,
 			&MessageHandler::gps_vel_callback, this);
 	svo_sub = nh.subscribe("svo/pose", 10,
 			&MessageHandler::svo_callback, this);

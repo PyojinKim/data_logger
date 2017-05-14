@@ -181,6 +181,8 @@ void DataLogger::generateMatlabHeader()
 		*logStream << str;
 		str = "%%%%%%VICON_POSE : position(3) / orientation(4) \n";
 		*logStream << str;
+		str = "%%%%%%ZED_VO_POSE : position(2) / orientation(1) \n";
+		*logStream << str;
 
 		str = "LOG_GLOBAL_TIME = "+ to_string(LOG_GLOBAL_TIME) +";\n";
 		*logStream << str;
@@ -193,6 +195,8 @@ void DataLogger::generateMatlabHeader()
 		str = "LOG_SVO_POSE = "+ to_string(LOG_SVO_POSE) +";\n";
 		*logStream << str;
 		str = "LOG_VICON_POSE = "+ to_string(LOG_VICON_POSE) +";\n";
+		*logStream << str;
+		str = "LOG_ZED_VO_POSE = "+ to_string(LOG_ZED_VO_POSE) +";\n";
 		*logStream << str;
 
 		logStream->close();

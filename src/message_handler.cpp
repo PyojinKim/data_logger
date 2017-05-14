@@ -23,6 +23,7 @@ MessageHandler::MessageHandler()
 			&MessageHandler::svo_callback, this);
 	vicon_sub = nh.subscribe("vicon/pose", 10,
 			&MessageHandler::vicon_callback, this);
+	zed_vo_sub = nh.subscribe("/ICSLpioneer/vo_data", 10, &MessageHandler::zed_vo_callback, this);
 }
 
 MessageHandler::~MessageHandler()
@@ -116,5 +117,20 @@ void MessageHandler::vicon_callback(const geometry_msgs::PoseStamped::ConstPtr& 
 
 	log_mutex.lock();
 	log->addEntry( LOG_VICON_POSE, buffer, timestamp);
+	log_mutex.unlock();
+}
+
+void MessageHandler::zed_vo_callback(const data_logger::msgVO::ConstPtr& msg)
+{
+	double timestamp = 0;
+
+	Array2D<double> buffer = Zeros(3,1);
+	buffer[0][0] = msg->x;
+	buffer[1][0] = msg->z;
+	buffer[2][0] = (-msg->yaw) + (HSS_PI/2);
+	buffer[2][0] = atan2(sin(buffer[2][0]), cos(buffer[2][0])); // wrapToPi [-pi,pi]
+
+	log_mutex.lock();
+	log->addEntry( LOG_ZED_VO_POSE, buffer, timestamp);
 	log_mutex.unlock();
 }

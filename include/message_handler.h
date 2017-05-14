@@ -12,6 +12,7 @@
 #include <geometry_msgs/TwistStamped.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 #include <geometry_msgs/PoseStamped.h>
+#include "data_logger/msgVO.h"
 
 namespace hss
 {
@@ -35,12 +36,14 @@ private:
 	ros::Subscriber gps_vel_sub;
 	ros::Subscriber svo_sub;
 	ros::Subscriber vicon_sub;
+	ros::Subscriber zed_vo_sub;
 
 	void imu_callback(const sensor_msgs::Imu::ConstPtr& msg);
 	void gps_fix_callback(const sensor_msgs::NavSatFix::ConstPtr& msg);
 	void gps_vel_callback(const geometry_msgs::TwistStamped::ConstPtr& msg);
 	void svo_callback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg);
 	void vicon_callback(const geometry_msgs::PoseStamped::ConstPtr& msg);
+	void zed_vo_callback(const data_logger::msgVO::ConstPtr& msg);
 };
 
 };
